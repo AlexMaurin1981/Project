@@ -60,9 +60,6 @@ public class UserDaoJDBCImpl implements UserDao {
           throw new RuntimeException("Error save user", e);
       }
 
-
-
-
     }
 
     public void removeUserById(long id) {
@@ -83,7 +80,6 @@ public class UserDaoJDBCImpl implements UserDao {
         List <User> userList = new ArrayList<>();
         String getAll = "SELECT * FROM users ";
 
-
        try ( Statement statement= connection.createStatement();
         ResultSet resultSet = statement.executeQuery(getAll)){
            while (resultSet.next()) {
@@ -92,16 +88,9 @@ public class UserDaoJDBCImpl implements UserDao {
                user.setAge(resultSet.getByte("age"));
                userList.add(user);
            }
-
-
-
        }catch ( SQLException e){
            throw  new RuntimeException("Error getting users",e);
        }
-
-
-
-
         return  userList;
     }
 
@@ -112,6 +101,5 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e){
            throw  new RuntimeException("Error cleaning table", e);
        }
-
     }
 }
