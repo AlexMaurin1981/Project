@@ -1,0 +1,554 @@
+Index: Hibernate-JDBC/.idea/misc.xml
+===================================================================
+diff --git a/Hibernate-JDBC/.idea/misc.xml b/Hibernate-JDBC/.idea/misc.xml
+deleted file mode 100644
+--- a/Hibernate-JDBC/.idea/misc.xml	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,14 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="MavenProjectsManager">
+-    <option name="originalFiles">
+-      <list>
+-        <option value="$PROJECT_DIR$/pom.xml" />
+-      </list>
+-    </option>
+-  </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK">
+-    <output url="file://$PROJECT_DIR$/out" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: Hibernate-JDBC/.idea/compiler.xml
+===================================================================
+diff --git a/Hibernate-JDBC/.idea/compiler.xml b/Hibernate-JDBC/.idea/compiler.xml
+deleted file mode 100644
+--- a/Hibernate-JDBC/.idea/compiler.xml	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,13 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="CompilerConfiguration">
+-    <annotationProcessing>
+-      <profile name="Maven default annotation processors profile" enabled="true">
+-        <sourceOutputDir name="target/generated-sources/annotations" />
+-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+-        <outputRelativeToContentRoot value="true" />
+-        <module name="TaskJDBC" />
+-      </profile>
+-    </annotationProcessing>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: Hibernate-JDBC/TaskJDBC.iml
+===================================================================
+diff --git a/Hibernate-JDBC/TaskJDBC.iml b/Hibernate-JDBC/TaskJDBC.iml
+deleted file mode 100644
+--- a/Hibernate-JDBC/TaskJDBC.iml	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,13 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module version="4">
+-  <component name="FacetManager">
+-    <facet type="jpa" name="JPA">
+-      <configuration>
+-        <setting name="validation-enabled" value="true" />
+-        <setting name="provider-name" value="Hibernate" />
+-        <datasource-mapping />
+-        <naming-strategy-map />
+-      </configuration>
+-    </facet>
+-  </component>
+-</module>
+\ No newline at end of file
+Index: README.md
+===================================================================
+diff --git a/README.md b/README.md
+deleted file mode 100644
+--- a/README.md	(revision c86933060af5404ffcb58091aa7edd8f7d7b1e39)
++++ /dev/null	(revision c86933060af5404ffcb58091aa7edd8f7d7b1e39)
+@@ -1,1 +0,0 @@
+-# project
+Index: Hibernate-JDBC/src/main/java/jm/task/core/jdbc/Main.java
+===================================================================
+diff --git a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/Main.java b/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/Main.java
+deleted file mode 100644
+--- a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/Main.java	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,21 +0,0 @@
+-package jm.task.core.jdbc;
+-
+-
+-
+-import static jm.task.core.jdbc.service.UserServiceImpl.userDao;
+-
+-public class Main {
+-    public static void main(String[] args) {
+-
+-
+-        userDao.dropUsersTable();
+-        userDao.createUsersTable();
+-        userDao.saveUser("Alex", "Ivanov", (byte) 23);
+-        userDao.saveUser("Anton", "Petrov", (byte) 35);
+-        userDao.saveUser("Elena", "Gromova", (byte) 35);
+-        userDao.saveUser("Sergey", "Kim", (byte) 42);
+-            System.out.println(userDao.getAllUsers().toString());
+-        userDao.removeUserById(2);
+-        userDao.cleanUsersTable();
+-    }
+-}
+Index: Hibernate-JDBC/src/main/java/jm/task/core/jdbc/service/UserService.java
+===================================================================
+diff --git a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/service/UserService.java b/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/service/UserService.java
+deleted file mode 100644
+--- a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/service/UserService.java	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,19 +0,0 @@
+-package jm.task.core.jdbc.service;
+-
+-import jm.task.core.jdbc.model.User;
+-
+-import java.util.List;
+-
+-public interface UserService {
+-    void createUsersTable();
+-
+-    void dropUsersTable();
+-
+-    void saveUser(String name, String lastName, byte age);
+-
+-    void removeUserById(long id);
+-
+-    List<User> getAllUsers();
+-
+-    void cleanUsersTable();
+-}
+Index: Hibernate-JDBC/pom.xml
+===================================================================
+diff --git a/Hibernate-JDBC/pom.xml b/Hibernate-JDBC/pom.xml
+deleted file mode 100644
+--- a/Hibernate-JDBC/pom.xml	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,63 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project xmlns="http://maven.apache.org/POM/4.0.0"
+-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+-    <modelVersion>4.0.0</modelVersion>
+-
+-    <groupId>org.example</groupId>
+-    <artifactId>TaskJDBC</artifactId>
+-    <version>1.0-SNAPSHOT</version>
+-
+-
+-
+-
+-    <dependencies>
+-<!--         Ваши зависимости-->
+-         <!-- https://mvnrepository.com/artifact/junit/junit -->
+-         <dependency>
+-             <groupId>junit</groupId>
+-             <artifactId>junit</artifactId>
+-             <version>4.13.2</version>
+-             <scope>test</scope>
+-         </dependency>
+-
+-        <dependency>
+-            <groupId>org.hibernate.javax.persistence</groupId>
+-            <artifactId>hibernate-jpa-2.1-api</artifactId>
+-            <version>1.0.2.Final</version>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.hibernate.common</groupId>
+-            <artifactId>hibernate-commons-annotations</artifactId>
+-            <version>6.0.5.Final</version>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.hibernate</groupId>
+-            <artifactId>hibernate-core</artifactId>
+-            <version>6.4.2.Final</version>
+-        </dependency>
+-        <dependency>
+-            <groupId>mysql</groupId>
+-            <artifactId>mysql-connector-java</artifactId>
+-            <version>8.0.31</version>
+-        </dependency>
+-
+-        <!-- https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api -->
+-
+-
+-           <dependency>
+-               <groupId>org.hibernate.orm</groupId>
+-               <artifactId>hibernate-core</artifactId>
+-               <version>6.3.1.Final</version>
+-           </dependency>
+-        <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api -->
+-        <dependency>
+-            <groupId>jakarta.persistence</groupId>
+-            <artifactId>jakarta.persistence-api</artifactId>
+-            <version>3.1.0-RC2</version>
+-        </dependency>
+-
+-
+-    </dependencies>
+-
+-</project>
+\ No newline at end of file
+Index: Hibernate-JDBC/src/main/java/jm/task/core/jdbc/service/UserServiceImpl.java
+===================================================================
+diff --git a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/service/UserServiceImpl.java b/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/service/UserServiceImpl.java
+deleted file mode 100644
+--- a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/service/UserServiceImpl.java	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,56 +0,0 @@
+-package jm.task.core.jdbc.service;
+-
+-
+-import jm.task.core.jdbc.dao.UserDao;
+-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
+-import jm.task.core.jdbc.model.User;
+-
+-import java.util.List;
+-
+-public class UserServiceImpl implements UserService  {
+-
+-    public  static UserDao userDao = new UserDaoJDBCImpl();
+-
+-    public void createUsersTable() {
+-
+-        userDao.createUsersTable();
+-
+-        System.out.println("Таблица создана");
+-
+-
+-
+-    }
+-
+-    public void dropUsersTable() {
+-
+-        userDao.dropUsersTable();
+-
+-    }
+-
+-    public void saveUser(String name, String lastName, byte age) {
+-
+-        userDao.saveUser(name,lastName,age);
+-
+-
+-
+-        System.out.println("имя пользователя - " + name + " добавлено в базу" );
+-    }
+-
+-    public void removeUserById(long id) {
+-
+-        userDao.removeUserById(id);
+-
+-    }
+-
+-    public List<User> getAllUsers() {
+-         System.out.println(userDao.getAllUsers().toString());
+-        return userDao.getAllUsers();
+-    }
+-
+-    public void cleanUsersTable() {
+-
+-        userDao.cleanUsersTable();
+-
+-        System.out.println("Таблица очищена");
+-    }
+-}
+Index: Hibernate-JDBC/.idea/jarRepositories.xml
+===================================================================
+diff --git a/Hibernate-JDBC/.idea/jarRepositories.xml b/Hibernate-JDBC/.idea/jarRepositories.xml
+deleted file mode 100644
+--- a/Hibernate-JDBC/.idea/jarRepositories.xml	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,20 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RemoteRepositoriesConfiguration">
+-    <remote-repository>
+-      <option name="id" value="central" />
+-      <option name="name" value="Central Repository" />
+-      <option name="url" value="https://repo.maven.apache.org/maven2" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="central" />
+-      <option name="name" value="Maven Central repository" />
+-      <option name="url" value="https://repo1.maven.org/maven2" />
+-    </remote-repository>
+-    <remote-repository>
+-      <option name="id" value="jboss.community" />
+-      <option name="name" value="JBoss Community repository" />
+-      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+-    </remote-repository>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: Hibernate-JDBC/src/main/java/jm/task/core/jdbc/dao/UserDao.java
+===================================================================
+diff --git a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/dao/UserDao.java b/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/dao/UserDao.java
+deleted file mode 100644
+--- a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/dao/UserDao.java	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,19 +0,0 @@
+-package jm.task.core.jdbc.dao;
+-
+-import jm.task.core.jdbc.model.User;
+-
+-import java.util.List;
+-
+-public interface UserDao {
+-    void createUsersTable();
+-
+-    void dropUsersTable();
+-
+-    void saveUser(String name, String lastName, byte age);
+-
+-    void removeUserById(long id);
+-
+-    List<User> getAllUsers();
+-
+-    void cleanUsersTable();
+-}
+Index: Hibernate-JDBC/src/main/java/jm/task/core/jdbc/util/Util.java
+===================================================================
+diff --git a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/util/Util.java b/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/util/Util.java
+deleted file mode 100644
+--- a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/util/Util.java	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,29 +0,0 @@
+-package jm.task.core.jdbc.util;
+-
+-import java.sql.Connection;
+-import java.sql.DriverManager;
+-import java.sql.SQLException;
+-
+-public class Util {
+-
+-    private static final String URL = "jdbc:mysql://localhost/users";
+-    private static final String NAME = "root";
+-    private static final String PASSWORD = "root";
+-
+-
+-    public static Connection getConnection() {
+-        Connection connection = null;
+-        try {
+-
+-            Class.forName("com.mysql.cj.jdbc.Driver");
+-            connection = DriverManager.getConnection(URL, NAME, PASSWORD);
+-            System.out.println("Соединение установлено ....");
+-
+-        } catch (ClassNotFoundException | SQLException e) {
+-            e.printStackTrace();
+-            System.out.println("Connection error ");
+-
+-        }
+-        return connection;
+-    }
+-}
+Index: Hibernate-JDBC/.idea/.gitignore
+===================================================================
+diff --git a/Hibernate-JDBC/.idea/.gitignore b/Hibernate-JDBC/.idea/.gitignore
+deleted file mode 100644
+--- a/Hibernate-JDBC/.idea/.gitignore	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,8 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+-# Editor-based HTTP Client requests
+-/httpRequests/
+-# Datasource local storage ignored files
+-/dataSources/
+-/dataSources.local.xml
+Index: Hibernate-JDBC/src/test/java/UserServiceTest.java
+===================================================================
+diff --git a/Hibernate-JDBC/src/test/java/UserServiceTest.java b/Hibernate-JDBC/src/test/java/UserServiceTest.java
+deleted file mode 100644
+--- a/Hibernate-JDBC/src/test/java/UserServiceTest.java	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,102 +0,0 @@
+-import jm.task.core.jdbc.model.User;
+-import jm.task.core.jdbc.service.UserService;
+-import jm.task.core.jdbc.service.UserServiceImpl;
+-import org.junit.Assert;
+-import org.junit.Test;
+-
+-import java.util.List;
+-
+-public class UserServiceTest {
+-    private final UserService userService = new UserServiceImpl();
+-
+-    private final String testName = "Ivan";
+-    private final String testLastName = "Ivanov";
+-    private final byte testAge = 5;
+-
+-
+-    @Test
+-    public void dropUsersTable() {
+-        try {
+-            userService.dropUsersTable();
+-            userService.dropUsersTable();
+-        } catch (Exception e) {
+-            Assert.fail("При тестировании удаления таблицы произошло исключение\n" + e);
+-        }
+-    }
+-
+-    @Test
+-    public void createUsersTable() {
+-        try {
+-            userService.dropUsersTable();
+-            userService.createUsersTable();
+-        } catch (Exception e) {
+-            Assert.fail("При тестировании создания таблицы пользователей произошло исключение\n" + e.getMessage());
+-        }
+-    }
+-
+-    @Test
+-    public void saveUser() {
+-        try {
+-            userService.dropUsersTable();
+-            userService.createUsersTable();
+-            userService.saveUser(testName, testLastName, testAge);
+-
+-            User user = userService.getAllUsers().get(0);
+-
+-            if (!testName.equals(user.getName())
+-                    || !testLastName.equals(user.getLastName())
+-                    || testAge != user.getAge()
+-            ) {
+-                Assert.fail("User был некорректно добавлен в базу данных");
+-            }
+-
+-        } catch (Exception e) {
+-            Assert.fail("Во время тестирования сохранения пользователя произошло исключение\n" + e);
+-        }
+-    }
+-
+-    @Test
+-    public void removeUserById() {
+-        try {
+-            userService.dropUsersTable();
+-            userService.createUsersTable();
+-            userService.saveUser(testName, testLastName, testAge);
+-            userService.removeUserById(1L);
+-        } catch (Exception e) {
+-            Assert.fail("При тестировании удаления пользователя по id произошло исключение\n" + e);
+-        }
+-    }
+-
+-    @Test
+-    public void getAllUsers() {
+-        try {
+-            userService.dropUsersTable();
+-            userService.createUsersTable();
+-            userService.saveUser(testName, testLastName, testAge);
+-            List<User> userList = userService.getAllUsers();
+-
+-            if (userList.size() != 1) {
+-                Assert.fail("Проверьте корректность работы метода сохранения пользователя/удаления или создания таблицы");
+-            }
+-        } catch (Exception e) {
+-            Assert.fail("При попытке достать всех пользователей из базы данных произошло исключение\n" + e);
+-        }
+-    }
+-
+-    @Test
+-    public void cleanUsersTable() {
+-        try {
+-            userService.dropUsersTable();
+-            userService.createUsersTable();
+-            userService.saveUser(testName, testLastName, testAge);
+-            userService.cleanUsersTable();
+-
+-            if (userService.getAllUsers().size() != 0) {
+-                Assert.fail("Метод очищения таблицы пользователей реализован не корректно");
+-            }
+-        } catch (Exception e) {
+-            Assert.fail("При тестировании очистки таблицы пользователей произошло исключение\n" + e);
+-        }
+-    }
+-
+-}
+Index: Hibernate-JDBC/src/main/java/jm/task/core/jdbc/model/User.java
+===================================================================
+diff --git a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/model/User.java b/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/model/User.java
+deleted file mode 100644
+--- a/Hibernate-JDBC/src/main/java/jm/task/core/jdbc/model/User.java	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
++++ /dev/null	(revision 3ff952fb2951db4774214d3c352c25ebb4bec32e)
+@@ -1,73 +0,0 @@
+-package jm.task.core.jdbc.model;
+-
+-import javax.persistence.*;
+-
+-@Entity
+-@Table (name =  "users")
+-public class User {
+-    @Id
+-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+-    @Column
+-    private Long id;
+-
+-    @Column
+-    private String name;
+-
+-    @Column
+-    private String lastName;
+-
+-    @Column
+-    private Byte age;
+-
+-    public User() {
+-
+-    }
+-
+-    public User(String name, String lastName, Byte age) {
+-        this.name = name;
+-        this.lastName = lastName;
+-        this.age = age;
+-    }
+-
+-    public Long getId() {
+-        return id;
+-    }
+-
+-    public void setId(Long id) {
+-        this.id = id;
+-    }
+-
+-    public String getName() {
+-        return name;
+-    }
+-
+-    public void setName(String name) {
+-        this.name = name;
+-    }
+-
+-    public String getLastName() {
+-        return lastName;
+-    }
+-
+-    public void setLastName(String lastName) {
+-        this.lastName = lastName;
+-    }
+-
+-    public Byte getAge() {
+-        return age;
+-    }
+-
+-    public void setAge(Byte age) {
+-        this.age = age;
+-    }
+-
+-    @Override
+-    public String toString() {
+-        return "User{" +
+-                "id=" + id +
+-                ", name='" + name + '\'' +
+-                ", lastName='" + lastName + '\'' +
+-                ", age=" + age +
+-                '}';
+-    }
+-}
